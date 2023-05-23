@@ -1,11 +1,9 @@
 import sys, threading
 import time
-from unittest import result
 import numpy as np 
 from scipy.optimize import linprog 
 from PyQt5.QtWidgets import QApplication,QFormLayout,QWidget,QVBoxLayout,QHBoxLayout,QFrame,QLineEdit,QRadioButton,QLabel,QTableWidget,QPushButton
 from PyQt5.QtGui import QIcon,QIntValidator
-from PyQt5.QtCore import QSize
 sys.setrecursionlimit(10**7) ,threading.stack_size(2**27)
 Zopt = np.inf 
 iterations = 0
@@ -41,7 +39,7 @@ class Vecteur(QFrame):
 class Choix(QFrame):
     def __init__(self,parent=None):
         super().__init__(parent=parent)
-        self.choix1,self.choix2,layout=QRadioButton('plne',self),QRadioButton('plne 0/1',self),QHBoxLayout()
+        self.choix1,self.choix2,layout=QRadioButton('PLNE',self),QRadioButton('PLNE 0/1',self),QHBoxLayout()
         layout.addWidget(self.choix1),layout.addWidget(self.choix2)
         self.setLayout(layout)
 class TypePrblm(QFrame):
@@ -67,7 +65,7 @@ class MainWindo(QWidget):
                 self.matric.setColumnCount(0)
         self.setWindowIcon(QIcon("Icon.ico")),self.setObjectName('MainWindo'),self.setGeometry(100,50,800,600)
         self.nbr_variable,self.nbr_constraint,self.rhs,self.coeff,self.choix,self.type,self.matric,self.calculer=QLineEdit(self),QLineEdit(self),Vecteur(self),Vecteur(self),Choix(self),TypePrblm(self),QTableWidget(self),QPushButton('Calculer',self)
-        self.nbr_variable.setPlaceholderText("Nombre de variables "),self.nbr_constraint.setPlaceholderText("Nombre de constraint "),self.nbr_variable.setValidator(QIntValidator()),self.nbr_constraint.setValidator(QIntValidator())
+        self.nbr_variable.setPlaceholderText("Nombre de variables "),self.nbr_constraint.setPlaceholderText("Nombre de constraint "),self.nbr_variable.setValidator(QIntValidator(1,9)),self.nbr_constraint.setValidator(QIntValidator(1,9))
         self.nbr_variable.textChanged.connect(nbrvariable_changed ),self.nbr_constraint.textChanged.connect(nbrcontarint_changed)
         self.calculer.clicked.connect(self.calcule)
         self.setLayout(),self.show()

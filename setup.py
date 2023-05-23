@@ -5,6 +5,7 @@ style='--add-data=style.qss;.' if os.name=='nt' else'--add-data=style.qss:.'
 PyInstaller.__main__.run(
     [
         'main.py',
+        '--name=Branch And Bound',
         '--windowed',
         '--onedir',
         '--icon=Icon.ico',
